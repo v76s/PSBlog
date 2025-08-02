@@ -28,37 +28,39 @@ model User {
 }
 
 model Post {
-  id          String    @id @default(cuid())
-  title       String
-  content     String
-  published   Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId    String
-  slug        String    @unique
-  excerpt     String?
-  coverImage  String?
-  comments    Comment[]
-  tags        Tag[]     @relation("PostToTag")
+  id         String    @id @default(uuid())
+  title      String
+  content    String
+  excerpt    String?
+  slug       String    @unique
+  published  Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  coverImage String?
+  authorId   String?
+  author     User?     @relation(fields: [authorId], references: [id])
+  guestName  String?
+  guestEmail String?
+  comments   Comment[] // <-- Add this line
+  tags       Tag[] // <-- Add this line
 }
 
 model Comment {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId  String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
-  isApproved Boolean  @default(false)
+  post      Post     @relation(fields: [postId], references: [id])
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  guestName String?
+  isApproved Boolean @default(false) // <-- Add this line
 }
 
 model Tag {
-  id    String @id @default(cuid())
+  id    String @id @default(uuid())
   name  String @unique
-  posts Post[] @relation("PostToTag")
+  posts Post[] // <-- Add this line
 }
 
 enum Role {

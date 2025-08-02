@@ -27,7 +27,7 @@ export default async function BlogPage() {
         <div className="absolute inset-0 bg-grid-primary/5 [mask-image:linear-gradient(0deg,white,transparent)] dark:[mask-image:linear-gradient(0deg,white,transparent)]" style={{ backgroundSize: '32px 32px' }}></div>
         <div className="relative">
           <h1 className="text-4xl font-bold mb-4 animate-fade-in">Blog <span className="text-primary">Posts</span></h1>
-          <p className="text-lg text-foreground/70 max-w-2xl animate-slide-up">Explore my latest thoughts, tutorials, and insights on various topics.</p>
+          <p className="text-lg text-foreground/70 max-w-2xl animate-slide-up">Explore the list of the blog posts on any of the Application Notes that might interest you.</p>
         </div>
       </div>
 

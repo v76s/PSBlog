@@ -29,7 +29,7 @@ export default function Navbar() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-xl font-bold text-foreground transition-colors hover:text-primary">
-                Personal Blog
+                Projects for Yourself
               </Link>
             </div>
             <div className="hidden sm:ml-8 sm:flex sm:space-x-8">
@@ -123,7 +123,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-hover transition-colors shadow-sm hover:shadow"
+                  className="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md bg-primary hover:bg-primary-hover transition-colors shadow-sm hover:shadow"
                 >
                   Register
                 </Link>

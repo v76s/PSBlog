@@ -1,8 +1,10 @@
+// "use client";
+
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
+import CommentSection from './CommentSection';
 import CommentForm from '@/components/blog/CommentForm';
-import CommentList from '@/components/blog/CommentList';
 
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany({
@@ -15,42 +17,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }) {
   const post = await prisma.post.findUnique({
-    where: {
-      slug: params.slug,
-    },
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-      tags: true,
-    },
+    where: { slug: params.slug },
+    include: { author: true, tags: true },
   });
 
-  if (!post || !post.published) {
-    notFound();
-  }
-
-  // Get approved comments for this post
-  const comments = await prisma.comment.findMany({
-    where: {
-      postId: post.id,
-      isApproved: true,
-    },
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  if (!post) return notFound();
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
@@ -111,10 +84,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
       <div className="mt-16 border-t border-border pt-10">
         <h2 className="text-2xl font-bold mb-8 text-foreground">Comments</h2>
+        <CommentSection postId={post.id} />
         <CommentForm postId={post.id} />
-        <div className="mt-8">
-          <CommentList comments={comments} />
-        </div>
       </div>
     </div>
   );

@@ -24,24 +24,32 @@ export default async function Home() {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-primary/5 to-transparent py-20 sm:py-32 rounded-3xl overflow-hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-grid-primary/5 [mask-image:linear-gradient(0deg,white,transparent)] dark:[mask-image:linear-gradient(0deg,white,transparent)]" style={{ backgroundSize: '32px 32px' }}></div>
-        <div className="relative max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-6 animate-fade-in">
-            Welcome to My <span className="text-primary">Personal Blog</span>
+      <section className="relative bg-gradient-to-b from-gray-100 to-gray-300 py-20 sm:py-32 rounded-3xl overflow-hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* PCB background image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src="/pcb-bg.png"
+            alt="PCB background"
+            className="w-full h-full object-cover opacity-10"
+            style={{ zIndex: 1 }}
+          />
+        </div>
+        {/* Existing grid overlay */}
+        <div className="absolute inset-0 bg-grid-primary/5 [mask-image:linear-gradient(0deg,white,transparent)] dark:[mask-image:linear-gradient(0deg,white,transparent)]"
+          style={{ backgroundSize: '32px 32px', zIndex: 2 }}></div>
+        <div className="relative max-w-3xl mx-auto text-center" style={{ zIndex: 3 }}>
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl mb-6 animate-fade-in">            
+            <span className="text-primary">Projects for Yourself</span>
           </h1>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            A place where I share my thoughts, ideas, and experiences about technology, design, and life.
+            A place to keep some re-usable Application Notes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.4s' }}>
             <Link
               href="/blog"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-hover transition-colors shadow-md hover:shadow-lg"
-            >
-              Read the Blog
-              <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-              </svg>
+              className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary/5 transition-colors"
+            >              
+              Blog List
             </Link>
             <Link
               href="/register"
@@ -53,30 +61,26 @@ export default async function Home() {
               href="/about"
               className="inline-flex items-center justify-center px-6 py-3 border border-muted text-base font-medium rounded-md text-foreground/80 bg-transparent hover:bg-muted/10 transition-colors"
             >
-              About Me
+              About
             </Link>
+            {/* <Link
+              href="/blog/submit"
+              className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary/5 transition-colors"
+            >
+              Submit Blog (Guest)
+            </Link> */}
           </div>
         </div>
       </section>
 
       {/* Latest Posts Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Latest <span className="text-primary">Posts</span></h2>
-          <Link href="/blog" className="group flex items-center text-primary hover:text-primary-hover transition-colors">
-            View all posts
-            <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-            </svg>
-          </Link>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestPosts.length > 0 ? (
             latestPosts.map((post, index) => (
               <div 
                 key={post.id} 
-                className="group bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-border/50 hover:border-primary/20 animate-slide-up" 
+                className="group bg-gradient-to-br from-gray-100 to-gray-300 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-border/50 hover:border-primary/20 animate-slide-up" 
                 style={{ animationDelay: `${0.1 * (index + 1)}s` }}
               >
                 {post.coverImage ? (
@@ -124,7 +128,7 @@ export default async function Home() {
               </div>
             ))
           ) : (
-            <div className="col-span-3 text-center py-16 bg-card/50 rounded-xl border border-border/50">
+            <div className="col-span-3 text-center py-16 bg-gradient-to-br from-gray-100 to-gray-300 rounded-xl border border-border/50">
               <svg className="w-16 h-16 mx-auto text-foreground/20 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm0 2a1 1 0 00-1 1v6a1 1 0 001 1h10a1 1 0 001-1V7a1 1 0 00-1-1H5z" clipRule="evenodd"></path>
               </svg>

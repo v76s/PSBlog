@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Blog",
-  description: "A personal blog built with Next.js, Prisma, and Supabase",
+  title: "Application Notes",
+  description: "The personal notes on Projects for Yourself",
 };
 
 export default function RootLayout({
@@ -38,8 +38,8 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Personal Blog</h3>
-                  <p className="text-foreground/70 mb-4">A place where I share my thoughts, ideas, and experiences.</p>
+                  <h3 className="text-lg font-semibold mb-4">Projects for Yourself</h3>
+                  <p className="text-foreground/70 mb-4">A place to keep some re-usable Application Notes.</p>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
@@ -70,7 +70,7 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="mt-8 pt-8 border-t border-border text-center text-foreground/50 text-sm">
-                <p>© {new Date().getFullYear()} Personal Blog. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Projects for Yourself. All rights reserved.</p>
               </div>
             </div>
           </footer>

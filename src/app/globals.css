@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(135deg, #faf9f7 0%, #faf9f7 100%);
   --foreground: #171717;
   --primary: #3b82f6;
   --primary-hover: #2563eb;
@@ -11,8 +11,8 @@
   --accent-hover: #7c3aed;
   --success: #10b981;
   --error: #ef4444;
-  --border: #e5e7eb;
-  --card: #ffffff;
+  --border: #eec913;
+  --card: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   --card-foreground: #171717;
   --radius: 0.5rem;
 }
@@ -26,7 +26,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: linear-gradient(135deg, #23272f 0%, #111827 100%);
     --foreground: #ededed;
     --primary: #3b82f6;
     --primary-hover: #60a5fa;
@@ -37,7 +37,7 @@
     --success: #10b981;
     --error: #ef4444;
     --border: #374151;
-    --card: #111827;
+    --card: linear-gradient(135deg, #23272f 0%, #111827 100%);
     --card-foreground: #ededed;
   }
 }
