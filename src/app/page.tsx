@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   // Get the latest 3 published posts
   const latestPosts = await prisma.post.findMany({
     where: {
@@ -63,12 +67,14 @@ export default async function Home() {
             >
               About
             </Link>
-            {/* <Link
-              href="/blog/submit"
-              className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary/5 transition-colors"
-            >
-              Submit Blog (Guest)
-            </Link> */}
+            {session && (
+              <Link
+                href="/blog/submit"
+                className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary/5 transition-colors"
+              >
+                New Blog
+              </Link>
+            )}
           </div>
         </div>
       </section>

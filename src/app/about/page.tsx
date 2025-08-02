@@ -28,8 +28,7 @@ export default function AboutPage() {
             Solution oriented Full Stack Software Engineer with 20+ years of experience across SaaS.
             Experienced in Embedded device design as well as Next/React/NodeTypescript/Javascript/related tools.
             Also .NET/Azure, C#, C++, Linux, LoRa/RF communication and advanced smart-card applications, 
-            leading many implementations remote or on site internationally.Next.js, React, and
-            TypeScript to build hardware and software solutions.
+            leading many implementations remote or on site internationally.            
             </p>
           
           <h3 className="text-xl font-semibold mt-8 mb-4">The Application Notes are about </h3>

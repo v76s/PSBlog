@@ -50,7 +50,7 @@ export default function CommentForm({ postId }: { postId: string }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-primary text-white px-4 py-2 rounded"
+        className="inline-flex items-center justify-center px-6 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary/5 transition-colors"
       >
         {isSubmitting ? 'Submitting...' : 'Submit Comment'}
       </button>

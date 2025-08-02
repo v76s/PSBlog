@@ -28,21 +28,22 @@ model User {
 }
 
 model Post {
-  id         String    @id @default(uuid())
-  title      String
-  content    String
-  excerpt    String?
-  slug       String    @unique
-  published  Boolean   @default(false)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  coverImage String?
-  authorId   String?
-  author     User?     @relation(fields: [authorId], references: [id])
-  guestName  String?
-  guestEmail String?
-  comments   Comment[] // <-- Add this line
-  tags       Tag[] // <-- Add this line
+  id              String    @id @default(uuid())
+  title           String
+  content         String
+  contentMarkdown String?   // <-- Add this line
+  excerpt         String?
+  slug            String    @unique
+  published       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  coverImage      String?
+  authorId        String?
+  author          User?     @relation(fields: [authorId], references: [id])
+  guestName       String?
+  guestEmail      String?
+  comments        Comment[] // <-- Add this line
+  tags            Tag[]     // <-- Add this line
 }
 
 model Comment {

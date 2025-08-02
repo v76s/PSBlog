@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 
 interface PostEditorProps {
   post?: {
@@ -19,6 +20,7 @@ interface PostEditorProps {
 export default function PostEditor({ post, onSubmit }: PostEditorProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [markdown, setMarkdown] = useState(post?.content || '');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,6 +36,15 @@ export default function PostEditor({ post, onSubmit }: PostEditorProps) {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleImageUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+    const data = await res.json();
+    // Insert Markdown image syntax at cursor
+    setMarkdown(markdown + `\n![alt text](${data.url})\n`);
   };
 
   return (
@@ -98,17 +109,21 @@ export default function PostEditor({ post, onSubmit }: PostEditorProps) {
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700">
-          Content
-        </label>
+        <label className="block text-sm font-medium mb-2">Content (Markdown)</label>
         <textarea
-          name="content"
-          id="content"
+          value={markdown}
+          onChange={e => setMarkdown(e.target.value)}
           rows={15}
-          defaultValue={post?.content || ''}
-          required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
+          className="w-full border rounded p-2 font-mono"
+          placeholder="Write your post in Markdown. Use ![alt](url) for images."
         />
+      </div>
+
+      <div className="mt-4">
+        <label className="block text-sm font-medium mb-2">Preview</label>
+        <div className="prose max-w-none border rounded p-4 bg-card">
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </div>
       </div>
 
       <div className="flex items-center">

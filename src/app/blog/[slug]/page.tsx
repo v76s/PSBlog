@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import CommentSection from './CommentSection';
 import CommentForm from '@/components/blog/CommentForm';
+import ReactMarkdown from 'react-markdown';
 
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany({
@@ -76,9 +77,7 @@ export default async function BlogPostPage({ params }) {
         )}
 
         <div className="mb-12 text-foreground/90 leading-relaxed">
-          {post.content.split('\n').map((paragraph, index) => (
-            <p key={index} className="mb-4">{paragraph}</p>
-          ))}
+          <ReactMarkdown>{post.contentMarkdown || post.content}</ReactMarkdown>
         </div>
       </article>
 

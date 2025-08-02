@@ -1,8 +1,12 @@
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 
 export default async function BlogPage() {
+  const session = await getServerSession(authOptions);
+
   // Get all published posts
   const posts = await prisma.post.findMany({
     where: {
@@ -28,6 +32,16 @@ export default async function BlogPage() {
         <div className="relative">
           <h1 className="text-4xl font-bold mb-4 animate-fade-in">Blog <span className="text-primary">Posts</span></h1>
           <p className="text-lg text-foreground/70 max-w-2xl animate-slide-up">Explore the list of the blog posts on any of the Application Notes that might interest you.</p>
+          {session && (
+            <div className="mt-4 flex justify-end">
+              <Link
+                href="/blog/submit"
+                className="bg-primary text-white px-4 py-2 rounded shadow hover:bg-primary-hover transition-colors font-medium"
+              >
+                New Blog
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
