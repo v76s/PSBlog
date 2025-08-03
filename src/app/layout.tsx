@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/providers/auth-provider";
 import Navbar from "@/components/layout/Navbar";
+import Link from 'next/link'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,8 +45,8 @@ export default function RootLayout({
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
                   <ul className="space-y-2">
-                    <li><a href="/" className="text-foreground/70 hover:text-primary transition-colors">Home</a></li>
-                    <li><a href="/blog" className="text-foreground/70 hover:text-primary transition-colors">Blog</a></li>
+                    <li><Link href="/" className="text-foreground/70 hover:text-primary transition-colors">Home</Link></li>
+                    <li><Link href="/blog" className="text-foreground/70 hover:text-primary transition-colors">Blog</Link></li>
                   </ul>
                 </div>
                 <div>

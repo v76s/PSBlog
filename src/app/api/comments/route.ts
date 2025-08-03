@@ -39,7 +39,6 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
     return NextResponse.json({ comments });
-  } catch (error) {
-    return NextResponse.json({ comments: [] }, { status: 500 });
+  } catch (error) {return NextResponse.json({ comments: [] }, { status: 500 });
   }
 }
