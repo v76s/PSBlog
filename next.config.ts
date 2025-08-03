@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  target: 'serverless',
   eslint: {
     ignoreDuringBuilds: true, // Disable ESLint during build
   },
@@ -10,4 +11,4 @@ const nextConfig: NextConfig = {
   // Your other Next.js config options here
 }
 
-export default nextConfig
+export default nextConfig;
